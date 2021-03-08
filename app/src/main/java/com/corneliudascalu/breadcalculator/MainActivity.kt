@@ -11,8 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val prefs = getPreferences(MODE_PRIVATE)
-        val token = prefs.getString("token", "") ?: ""
+        val token = User.getToken(this)
         if (token.isEmpty()) {
             supportFragmentManager.commit {
                 replace(R.id.container, LoginFragment())
