@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/waterIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_round_invert_colors_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#0000FF" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/waterSlider"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:valueFrom="0"
+        android:valueTo="100"
+        app:layout_constraintBottom_toBottomOf="@id/waterIcon"
+        app:layout_constraintEnd_toStartOf="@+id/hydrationPercentage"
+        app:layout_constraintStart_toEndOf="@id/waterIcon"
+        app:layout_constraintTop_toTopOf="@id/waterIcon" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/hydrationPercentage"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:gravity="center_vertical|end"
+        android:text="108%"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/waterIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/waterIcon" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
