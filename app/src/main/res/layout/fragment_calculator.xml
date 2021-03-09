@@ -6,19 +6,49 @@
     android:padding="16dp">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/flourIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_baseline_grain_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#0000FF" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/flourIcon"
+        app:layout_constraintEnd_toStartOf="@id/hydrationPercentage"
+        app:layout_constraintStart_toEndOf="@id/flourIcon"
+        app:layout_constraintTop_toTopOf="@id/flourIcon">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/flourQty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Grams"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/waterIcon"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_round_invert_colors_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/starterIcon"
         app:tint="#0000FF" />
 
     <com.google.android.material.slider.Slider
         android:id="@+id/waterSlider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
+        android:value="70"
         android:valueFrom="0"
         android:valueTo="100"
         app:layout_constraintBottom_toBottomOf="@id/waterIcon"
@@ -30,13 +60,57 @@
         android:id="@+id/hydrationPercentage"
         android:layout_width="64dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
         android:gravity="center_vertical|end"
-        android:text="108%"
+        android:text="70%"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/waterIcon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/waterIcon" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/starterIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_baseline_lens_blur_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/flourIcon"
+        app:tint="#0000FF" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/starterSlider"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:value="5"
+        android:valueFrom="0"
+        android:valueTo="20"
+        app:layout_constraintBottom_toBottomOf="@id/starterIcon"
+        app:layout_constraintEnd_toStartOf="@+id/hydrationPercentage"
+        app:layout_constraintStart_toEndOf="@id/starterIcon"
+        app:layout_constraintTop_toTopOf="@id/starterIcon" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/starterPercentage"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:gravity="center_vertical|end"
+        android:text="5%"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/starterIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/starterIcon" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Calculate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/waterIcon" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,5 +13,11 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
         binding.waterSlider.addOnChangeListener { slider, value, fromUser ->
             binding.hydrationPercentage.text = "${value.toInt()}%"
         }
+        binding.starterSlider.addOnChangeListener { slider, value, fromUser ->
+            binding.starterPercentage.text = "${value.toInt()}%"
+        }
+        binding.submitButton.setOnClickListener {
+            Navigator.navigateToRecipe()
+        }
     }
 }

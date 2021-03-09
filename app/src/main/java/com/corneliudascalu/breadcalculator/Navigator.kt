@@ -10,4 +10,8 @@ object Navigator {
             addToBackStack(null)
         }
     }
+
+    fun navigateToRecipe() {
+        TODO("Not yet implemented")
+    }
 }
