@@ -3,11 +3,21 @@ package com.corneliudascalu.breadcalculator
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
+import io.flutter.embedding.android.FlutterFragment
 
 object Navigator {
     fun navigateToCalculator(fragmentManager: FragmentManager) {
         fragmentManager.commit {
             replace(R.id.container, CalculatorFragment())
+            addToBackStack(null)
+        }
+    }
+
+    fun navigateToFlutterCalculator(fragmentManager: FragmentManager) {
+        fragmentManager.commit {
+            val flutterFragment =
+                FlutterFragment.withCachedEngine(FLUTTER_ENGINE_ID).build<FlutterFragment>()
+            replace(R.id.container, flutterFragment)
             addToBackStack(null)
         }
     }

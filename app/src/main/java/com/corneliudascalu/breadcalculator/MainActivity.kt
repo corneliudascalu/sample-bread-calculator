@@ -16,10 +16,7 @@ class MainActivity : AppCompatActivity() {
                 replace(R.id.container, LoginFragment())
             }
         } else {
-            supportFragmentManager.commit {
-                replace(R.id.container, CalculatorFragment())
-                addToBackStack(null)
-            }
+            Navigator.navigateToFlutterCalculator(supportFragmentManager)
         }
     }
 }

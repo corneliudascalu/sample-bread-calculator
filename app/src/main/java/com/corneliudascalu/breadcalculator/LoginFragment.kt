@@ -22,6 +22,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun navigateToCalculator() {
-        Navigator.navigateToCalculator(parentFragmentManager)
+        Navigator.navigateToFlutterCalculator(parentFragmentManager)
     }
 }
