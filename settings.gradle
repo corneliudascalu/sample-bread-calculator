@@ -1,2 +1,10 @@
 include ':app'
 rootProject.name = "Bread Calculator"
+
+// Flutter module
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+        settingsDir,
+        'shiny/.android/include_flutter.groovy'
+))
+include ':shiny'
