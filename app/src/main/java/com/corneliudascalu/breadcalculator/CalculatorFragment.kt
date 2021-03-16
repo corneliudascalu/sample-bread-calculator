@@ -3,7 +3,6 @@ package com.corneliudascalu.breadcalculator
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
 import com.corneliudascalu.breadcalculator.databinding.FragmentCalculatorBinding
 
 class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
