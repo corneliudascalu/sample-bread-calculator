@@ -13,11 +13,11 @@ class BreadCalculatorApp : Application() {
         super.onCreate()
         val flutterEngine = FlutterEngine(this)
 
+        flutterEngine.navigationChannel.setInitialRoute("/home")
         // Start executing Dart code in the FlutterEngine.
         flutterEngine.dartExecutor.executeDartEntrypoint(
             DartExecutor.DartEntrypoint.createDefault()
         )
-        flutterEngine.navigationChannel.setInitialRoute("/")
 
 
         // Cache the pre-warmed FlutterEngine to be used later by FlutterFragment.

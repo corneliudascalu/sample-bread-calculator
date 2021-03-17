@@ -1,16 +1,14 @@
-import 'dart:io';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-class BreadCalculator extends StatefulWidget {
-  BreadCalculator({Key key}) : super(key: key);
-
+class UglyCalculator extends StatefulWidget {
   @override
-  _BreadCalculatorState createState() => _BreadCalculatorState();
+  State<StatefulWidget> createState() {
+    return UglyCalculatorState();
+  }
 }
 
-class _BreadCalculatorState extends State<BreadCalculator> {
+class UglyCalculatorState extends State<UglyCalculator> {
   double _starterSliderValue = 0.05;
   double _waterSliderValue = 0.7;
   TextEditingController _flourController = TextEditingController();
@@ -21,8 +19,8 @@ class _BreadCalculatorState extends State<BreadCalculator> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
+    return CupertinoPageScaffold(
+      child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -35,16 +33,15 @@ class _BreadCalculatorState extends State<BreadCalculator> {
                   Padding(
                     padding: const EdgeInsets.only(right: 24.0),
                     child: Icon(
-                      Icons.grain,
+                      CupertinoIcons.wand_stars_inverse,
                       size: 48.0,
-                      color: Colors.deepPurple,
+                      color: CupertinoColors.activeBlue,
                     ),
                   ),
                   Expanded(
-                    child: TextFormField(
+                    child: CupertinoTextField(
                       controller: _flourController,
-                      decoration: InputDecoration(
-                          labelText: "Grams", border: OutlineInputBorder()),
+                      placeholder: "Grams",
                     ),
                   )
                 ],
@@ -56,12 +53,12 @@ class _BreadCalculatorState extends State<BreadCalculator> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.blur_on_rounded,
+                    CupertinoIcons.share,
                     size: 48.0,
-                    color: Colors.deepPurple,
+                    color: CupertinoColors.activeBlue,
                   ),
                   Expanded(
-                      child: Slider(
+                      child: CupertinoSlider(
                     onChanged: (value) {
                       setState(() {
                         _starterSliderValue = value;
@@ -84,12 +81,12 @@ class _BreadCalculatorState extends State<BreadCalculator> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.invert_colors,
+                    CupertinoIcons.drop,
                     size: 48.0,
-                    color: Colors.deepPurple,
+                    color: CupertinoColors.activeBlue,
                   ),
                   Expanded(
-                      child: Slider(
+                      child: CupertinoSlider(
                     onChanged: (value) {
                       setState(() {
                         _waterSliderValue = value;
@@ -108,69 +105,17 @@ class _BreadCalculatorState extends State<BreadCalculator> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 24),
-              child: ElevatedButton(
+              child: CupertinoButton(
                   onPressed: () {
-                    return _navigateToRecipe(context);
+                    return "";
                   },
                   child: Text(
                     "CALCULATE",
-                  )),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 24),
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, "/ugly");
-                  },
-                  child: Text(
-                    "UGLIFY",
                   )),
             ),
           ],
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _flourController.dispose();
-    super.dispose();
-  }
-
-  static const platform = MethodChannel("bread.corneliudascalu.com/calculate");
-
-  Future<void> _navigateToRecipe(BuildContext context) async {
-    try {
-      var parameters = {
-        "flour": int.parse(_flourController.text),
-        "water": _waterSliderValue,
-        "starter": _starterSliderValue
-      };
-      await platform.invokeMethod("calculateBread", parameters);
-      return Future.value(null);
-    } on PlatformException catch (e) {
-      print(e.message);
-      return showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          content: Text(e.message),
-        ),
-      );
-    }
-  }
-
-  Widget _platformSpecificContainer({Widget child}) {
-    if (Platform.isLinux) {
-      return SizedBox(
-        width: 400,
-        child: child,
-      );
-    } else {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: child,
-      );
-    }
   }
 }
