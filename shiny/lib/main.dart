@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(MyApp());
 
@@ -135,12 +136,8 @@ class _BreadCalculatorState extends State<BreadCalculator> {
                             " grams water.";
 
                     var text = flour + "\n" + starter + "\n" + water;
-                    return showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        content: Text(text),
-                      ),
-                    );
+
+                    return _calculateBread(context, flour);
                   },
                   child: Text(
                     "CALCULATE",
@@ -156,5 +153,22 @@ class _BreadCalculatorState extends State<BreadCalculator> {
   void dispose() {
     _flourController.dispose();
     super.dispose();
+  }
+
+  static const platform = MethodChannel("bread.corneliudascalu.com/calculate");
+
+  Future<void> _calculateBread(BuildContext context, String flour) async {
+    try {
+      var parameters = {"flour": flour};
+      var result = await platform.invokeMethod("calculateBread", parameters);
+      return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          content: Text(result),
+        ),
+      );
+    } on PlatformException catch (e) {
+      print(e.message);
+    }
   }
 }
