@@ -27,12 +27,12 @@ class BreadCalculator extends StatefulWidget {
 }
 
 class _BreadCalculatorState extends State<BreadCalculator> {
-  double _starterSliderValue = 0;
-  double _waterSliderValue = 0;
+  double _starterSliderValue = 0.05;
+  double _waterSliderValue = 0.7;
   TextEditingController _flourController = TextEditingController();
 
   String _formatPercent(double value) {
-    return value.toInt().toString() + "%";
+    return (value * 100).toInt().toString() + "%";
   }
 
   @override
@@ -85,7 +85,7 @@ class _BreadCalculatorState extends State<BreadCalculator> {
                     },
                     value: _starterSliderValue,
                     min: 0.0,
-                    max: 20.0,
+                    max: 0.2,
                   )),
                   Text(
                     _formatPercent(_starterSliderValue),
@@ -113,7 +113,7 @@ class _BreadCalculatorState extends State<BreadCalculator> {
                     },
                     value: _waterSliderValue,
                     min: 0.0,
-                    max: 100.0,
+                    max: 1.0,
                   )),
                   Text(
                     _formatPercent(_waterSliderValue),
@@ -126,18 +126,7 @@ class _BreadCalculatorState extends State<BreadCalculator> {
               padding: const EdgeInsets.only(top: 24),
               child: ElevatedButton(
                   onPressed: () {
-                    var flourQty = int.parse(_flourController.text);
-                    var flour = flourQty.toString() + " grams flour.";
-                    var starter =
-                        (_starterSliderValue * flourQty ~/ 100.0).toString() +
-                            " grams starter.";
-                    var water =
-                        (_waterSliderValue * flourQty ~/ 100.0).toString() +
-                            " grams water.";
-
-                    var text = flour + "\n" + starter + "\n" + water;
-
-                    return _calculateBread(context, flour);
+                    return _navigateToRecipe(context);
                   },
                   child: Text(
                     "CALCULATE",
@@ -157,18 +146,23 @@ class _BreadCalculatorState extends State<BreadCalculator> {
 
   static const platform = MethodChannel("bread.corneliudascalu.com/calculate");
 
-  Future<void> _calculateBread(BuildContext context, String flour) async {
+  Future<void> _navigateToRecipe(BuildContext context) async {
     try {
-      var parameters = {"flour": flour};
-      var result = await platform.invokeMethod("calculateBread", parameters);
+      var parameters = {
+        "flour": int.parse(_flourController.text),
+        "water": _waterSliderValue,
+        "starter": _starterSliderValue
+      };
+      await platform.invokeMethod("calculateBread", parameters);
+      return Future.value(null);
+    } on PlatformException catch (e) {
+      print(e.message);
       return showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          content: Text(result),
+          content: Text(e.message),
         ),
       );
-    } on PlatformException catch (e) {
-      print(e.message);
     }
   }
 }

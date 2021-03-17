@@ -18,20 +18,7 @@ class BreadCalculatorApp : Application() {
             DartExecutor.DartEntrypoint.createDefault()
         )
 
-        MethodChannel(
-            flutterEngine.dartExecutor.binaryMessenger,
-            "bread.corneliudascalu.com/calculate"
-        )
-            .setMethodCallHandler { call, result ->
 
-                if (call.method == "calculateBread") {
-                    val flour = call.argument<String>("flour")
-
-                    result.success("calculated flour: $flour")
-                } else {
-                    result.notImplemented()
-                }
-            }
 
         // Cache the pre-warmed FlutterEngine to be used later by FlutterFragment.
         FlutterEngineCache
