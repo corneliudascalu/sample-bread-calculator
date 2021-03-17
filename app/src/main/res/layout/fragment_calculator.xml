@@ -19,9 +19,9 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@id/flourIcon"
-        app:layout_constraintEnd_toStartOf="@id/hydrationPercentage"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/flourIcon"
         app:layout_constraintTop_toTopOf="@id/flourIcon">
 

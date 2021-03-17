@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Bread Calculator',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
       ),
       home: BreadCalculator(title: 'Flutter Demo Home Page'),
     );
@@ -29,11 +29,90 @@ class _BreadCalculatorState extends State<BreadCalculator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            ElevatedButton(onPressed: () {}, child: Text("Calculate")),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 24.0),
+                    child: Icon(
+                      Icons.grain,
+                      size: 48.0,
+                      color: Colors.deepPurple,
+                    ),
+                  ),
+                  Expanded(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          labelText: "Grams",
+                          border: OutlineInputBorder()),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.blur_on_rounded,
+                    size: 48.0,
+                    color: Colors.deepPurple,
+                  ),
+                  Expanded(
+                      child: Slider(
+                    onChanged: (value) {},
+                    value: 5.0,
+                    min: 0.0,
+                    max: 20.0,
+                  )),
+                  Text(
+                    "5%",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.invert_colors,
+                    size: 48.0,
+                    color: Colors.deepPurple,
+                  ),
+                  Expanded(
+                      child: Slider(
+                    onChanged: (value) {},
+                    value: 70.0,
+                    min: 0.0,
+                    max: 100.0,
+                  )),
+                  Text(
+                    "70%",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 24),
+              child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "CALCULATE",
+                  )),
+            ),
           ],
         ),
       ),
