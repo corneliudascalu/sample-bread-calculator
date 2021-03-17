@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -144,6 +146,20 @@ class _BreadCalculatorState extends State<BreadCalculator> {
         builder: (context) => AlertDialog(
           content: Text(e.message),
         ),
+      );
+    }
+  }
+
+  Widget _platformSpecificContainer({Widget child}) {
+    if (Platform.isLinux) {
+      return SizedBox(
+        width: 400,
+        child: child,
+      );
+    } else {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: child,
       );
     }
   }
