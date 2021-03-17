@@ -17,7 +17,7 @@ class BreadCalculatorApp : Application() {
         flutterEngine.dartExecutor.executeDartEntrypoint(
             DartExecutor.DartEntrypoint.createDefault()
         )
-
+        flutterEngine.navigationChannel.setInitialRoute("/")
 
 
         // Cache the pre-warmed FlutterEngine to be used later by FlutterFragment.
