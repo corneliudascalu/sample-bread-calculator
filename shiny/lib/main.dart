@@ -26,6 +26,14 @@ class BreadCalculator extends StatefulWidget {
 }
 
 class _BreadCalculatorState extends State<BreadCalculator> {
+  double _starterSliderValue = 0;
+  double _waterSliderValue = 0;
+  TextEditingController _flourController = TextEditingController();
+
+  String _formatPercent(double value) {
+    return value.toInt().toString() + "%";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,9 +57,9 @@ class _BreadCalculatorState extends State<BreadCalculator> {
                   ),
                   Expanded(
                     child: TextFormField(
+                      controller: _flourController,
                       decoration: InputDecoration(
-                          labelText: "Grams",
-                          border: OutlineInputBorder()),
+                          labelText: "Grams", border: OutlineInputBorder()),
                     ),
                   )
                 ],
@@ -69,13 +77,17 @@ class _BreadCalculatorState extends State<BreadCalculator> {
                   ),
                   Expanded(
                       child: Slider(
-                    onChanged: (value) {},
-                    value: 5.0,
+                    onChanged: (value) {
+                      setState(() {
+                        _starterSliderValue = value;
+                      });
+                    },
+                    value: _starterSliderValue,
                     min: 0.0,
                     max: 20.0,
                   )),
                   Text(
-                    "5%",
+                    _formatPercent(_starterSliderValue),
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   )
                 ],
@@ -93,13 +105,17 @@ class _BreadCalculatorState extends State<BreadCalculator> {
                   ),
                   Expanded(
                       child: Slider(
-                    onChanged: (value) {},
-                    value: 70.0,
+                    onChanged: (value) {
+                      setState(() {
+                        _waterSliderValue = value;
+                      });
+                    },
+                    value: _waterSliderValue,
                     min: 0.0,
                     max: 100.0,
                   )),
                   Text(
-                    "70%",
+                    _formatPercent(_waterSliderValue),
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   )
                 ],
@@ -108,7 +124,24 @@ class _BreadCalculatorState extends State<BreadCalculator> {
             Padding(
               padding: const EdgeInsets.only(top: 24),
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    var flourQty = int.parse(_flourController.text);
+                    var flour = flourQty.toString() + " grams flour.";
+                    var starter =
+                        (_starterSliderValue * flourQty ~/ 100.0).toString() +
+                            " grams starter.";
+                    var water =
+                        (_waterSliderValue * flourQty ~/ 100.0).toString() +
+                            " grams water.";
+
+                    var text = flour + "\n" + starter + "\n" + water;
+                    return showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        content: Text(text),
+                      ),
+                    );
+                  },
                   child: Text(
                     "CALCULATE",
                   )),
@@ -117,5 +150,11 @@ class _BreadCalculatorState extends State<BreadCalculator> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _flourController.dispose();
+    super.dispose();
   }
 }
