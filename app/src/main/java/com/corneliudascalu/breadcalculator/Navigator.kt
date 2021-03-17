@@ -9,7 +9,6 @@ object Navigator {
     fun navigateToCalculator(fragmentManager: FragmentManager) {
         fragmentManager.commit {
             replace(R.id.container, CalculatorFragment())
-            addToBackStack(null)
         }
     }
 

@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
                 replace(R.id.container, LoginFragment())
             }
         } else {
-            Navigator.navigateToFlutterCalculator(supportFragmentManager)
+            Navigator.navigateToCalculator(supportFragmentManager)
         }
     }
 }

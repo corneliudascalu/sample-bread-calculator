@@ -23,5 +23,6 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
             )
             Navigator.navigateToRecipe(parentFragmentManager, breadPreferences)
         }
+        binding.switchToFlutter.setOnClickListener { Navigator.navigateToFlutterCalculator(parentFragmentManager) }
     }
 }
