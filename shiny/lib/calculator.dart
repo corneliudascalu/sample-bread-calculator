@@ -116,16 +116,6 @@ class _BreadCalculatorState extends State<BreadCalculator> {
                     "CALCULATE",
                   )),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 24),
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, "/ugly");
-                  },
-                  child: Text(
-                    "UGLIFY",
-                  )),
-            ),
           ],
         ),
       ),

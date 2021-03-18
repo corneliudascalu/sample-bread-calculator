@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shiny/UglyCalculator.dart';
 import 'package:shiny/calculator.dart';
 
 void main() => runApp(MyApp());
@@ -11,7 +10,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         "/home": (context) => BreadCalculator(),
-        "/ugly": (context) => UglyCalculator()
       },
       title: 'Bread Calculator',
       theme: ThemeData(
